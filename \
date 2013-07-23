@@ -37,27 +37,20 @@ var camera = new THREE.PerspectiveCamera(
 
 // add the camera to the scene
 scene.add(camera);
+// Load image with ColladaLoadear
+loader.load('3Dmodels/coeur.dae', function (result) {
+    scene.add(result.scene);
+}
+// the camera starts at 0,0,0
+// so pull it back
+ camera.position.z = 300;
+
 // start the renderer
 renderer.setSize(SWidth, SHeight);
 
 // attach the render-supplied DOM element
 $container.append(renderer.domElement);
 
-// the camera starts at 0,0,0
-// so pull it back
- camera.position.z = 20;
-loader.load('3Dmodels/coeur.dae', function (result) {
-    scene.add(result.scene);
-    result.scene.rotation.y +=15
-renderer.render(scene,camera);
-});
-
-
-
 // render the seen
-//renderer.render(scene, camera);
-function render() {
-        requestAnimationFrame(render);
-            renderer.render(scene, camera);
-}
-render();
+renderer.render(scene, camera);
+

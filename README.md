@@ -13,3 +13,8 @@ J'utilisetais des technique d'opti graphique comme des Z-Buffers et des Bounding
 Je vous expliquerais aussir a quoi ca sert tout ces technique bizarre aux noms qui ne le sont pas moins plus.
 
 
+Branch DEV 1 :
+
+Ici on apprend a creer des objetm a les placer et a effectuer des rotations de cubes.
+C'est assezx basique, y'as ni texturing, ni lumiere.
+

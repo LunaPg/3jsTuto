@@ -13,8 +13,19 @@ J'utiliserais des techniques de rendering graphique comme des Z-Buffers et des B
 Je vous expliquerais aussi a quoi ca sert tout ces techniques bizarres aux noms qui ne le sont pas moins plus.
 
 
-Branch DEV 1 :
+Branch Dev1 
+-
 
 Ici on apprend a creer des objets, ici des carres, a les placer et a effectuer des rotations de cubes.
 C'est assez basique, il y a ni texturing, ni lumiere.
 
+Branch dev2
+-
+
+Importation et rendering de model 3D cree sous Sketchup avec three.js et ColladaLoader.js.
+
+
+Branch dev3
+-
+
+Affichage d'un cube et animation d'une camera qui bouge autour du cube.

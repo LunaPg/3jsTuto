@@ -23,3 +23,8 @@ Branch dev2
 -
 
 Importation et rendering de model 3D cree sous Sketchup avec three.js et ColladaLoader.js.
+
+Branch dev3
+-
+
+Affichage d'un cube et animation d'une camera qui bouge autour du cube.

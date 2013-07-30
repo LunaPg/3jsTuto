@@ -15,11 +15,11 @@ function launch(){
     function init(){
         // Scene Var
         // window.innerWidth / window.innerHeight
-       // var SWidth = window.innerWidth , 
-       //     SHeight = window.innerHeight;
+        var SWidth = window.innerWidth , 
+            SHeight = window.innerHeight;
 
-        var SWidth = 2200 , 
-            SHeight = 500;
+//        var SWidth = 2200 , 
+//            SHeight = 500;
         $container = $('#container');
         // Camera Var
         // F = Frustrum : Quite difficulte to translate in french :P
@@ -70,17 +70,17 @@ function launch(){
         camera = new THREE.PerspectiveCamera( ViewAngle, Aspect, FNear, FFar );
         console.log(camera.position.x);
         camera.position.z = 500;
-//        camera.position.x = radious * Math.sin( Cameratheta * Math.PI / 360 ) * Math.cos( Cameraphi * Math.PI / 360 );
-//        camera.position.y = radious * Math.sin(Cameraphi * Math.PI / 360 );
-//        camera.position.z = radious * Math.cos( Cameratheta * Math.PI / 360 ) * Math.cos( Cameraphi * Math.PI / 360 );
         console.log(camera);
 
 
         /************** SPOT LIGHT ************/
-        var dirlight   = new THREE.SpotLight( 0x8888FF, 2 );
-        dirlight.target.position.set( 170, 300, 120 );
-        dirlight.intensity = 1.5
-        dirlight.castShadow = true;
+//        var dirlight   = new THREE.SpotLight( 0x8888FF, 2 );
+        var dirlight   = new THREE.DirectionalLight( 0xFFFFFF, 1 );
+        dirlight.position.x = 150;
+        dirlight.position.y = 150;
+//        dirlight.target.position.set( 170, 300, 120 );
+///        dirlight.intensity = 1.5
+//        dirlight.castShadow = true;
         var terre = new THREE.Mesh( 
             new THREE.PlaneGeometry(300, 500, 1,2) 
         );
@@ -95,6 +95,7 @@ function launch(){
         // Big Up to you, http://egraether.com/
         // You only have to attached an object to it to make it move with your mouse
         controls = new THREE.TrackballControls( camera );
+        controllight = new THREE.TrackballControls( dirlight );
         controls.target.set( 0, 0, 0 )
         controls.panSpeed = 0.8;
         controls.keys = [ 65, 83, 68 ];
@@ -124,6 +125,22 @@ function launch(){
 //        renderer.shadowMapHeight = SHeight;
 
 //        renderer.shadowMapENabled = true;
+//
+        renderer.shadowMapEnabled = true;
+        renderer.shadowMapSoft = false;
+
+        renderer.shadowCameraNear = 3;
+        renderer.shadowCameraFar = camera.far;
+        renderer.shadowCameraFov = 50;
+
+        renderer.shadowMapBias = 0.0039;
+        renderer.shadowMapDarkness = 0.5;
+        renderer.shadowMapWidth = 1024;
+        renderer.shadowMapHeight = 1024;
+
+        dirlight.castShadow = true;
+        cube.castShadow = true;
+        terre.receiveShadow = true;
         // render the seen
         renderer.render(scene, camera);
     }
@@ -143,6 +160,7 @@ function launch(){
 
         // render the scene after moving the camera           
         controls.update();
+        controllight.update();
         renderer.render(scene, camera);
     }
 

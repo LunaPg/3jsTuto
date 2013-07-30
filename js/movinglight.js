@@ -40,12 +40,10 @@ function launch(){
 
         // Instanciation of the canvas : If WebGL enabled : GO FOR IT !
         if (window.WebGLRenderingContext){
-            renderer = new THREE.WebGLRenderer();
-            console.log("WEBGLRenderer !", renderer)
+            renderer = new THREE.WebGLRenderer( { antialiasing: true } );
             }
         else{
             renderer = new THREE.CanvasRenderer();
-            console.log("CanvaRenderer !", renderer)
         }
         scene = new THREE.Scene();
 
@@ -62,25 +60,17 @@ function launch(){
                 , CDepth)
             , cubeMaterial
         );
-//        cube.castShadow = true;
-//        cube.receiveShadow = true;
 
         /******************** CAMERA *****************/
         // Camera Instanciation
         camera = new THREE.PerspectiveCamera( ViewAngle, Aspect, FNear, FFar );
-        console.log(camera.position.x);
         camera.position.z = 500;
-        console.log(camera);
 
 
         /************** SPOT LIGHT ************/
-//        var dirlight   = new THREE.SpotLight( 0x8888FF, 2 );
         var dirlight   = new THREE.DirectionalLight( 0xFFFFFF, 1 );
         dirlight.position.x = 150;
         dirlight.position.y = 150;
-//        dirlight.target.position.set( 170, 300, 120 );
-///        dirlight.intensity = 1.5
-//        dirlight.castShadow = true;
         var terre = new THREE.Mesh( 
             new THREE.PlaneGeometry(300, 500, 1,2) 
         );
@@ -99,7 +89,7 @@ function launch(){
         controls.target.set( 0, 0, 0 )
         controls.panSpeed = 0.8;
         controls.keys = [ 65, 83, 68 ];
-
+        console.log(controls);
         var light = new THREE.AmbientLight( 0x9999FF ); // soft white light
         scene.add( dirlight );
         scene.add( light );
@@ -109,8 +99,7 @@ function launch(){
         scene.add(camera);
         // the camera starts at 0,0,0
         // so pull it back
-//       camera.lookAt (scene);
-        console.log(scene.position);
+       
         // start the renderer
         renderer.setSize(SWidth, SHeight);
 
@@ -118,14 +107,6 @@ function launch(){
         $container.append(renderer.domElement);
 
         // before rendering the scene, lets move our cubes in the scene
-//       renderer.setClearColor(0xEEEEEE, 1.0);
-//        renderer.clear();
-//        renderer.shadowCameraFov = 50;
-//        renderer.shadowMapWidth = SWidth;
-//        renderer.shadowMapHeight = SHeight;
-
-//        renderer.shadowMapENabled = true;
-//
         renderer.shadowMapEnabled = true;
         renderer.shadowMapSoft = false;
 
@@ -141,7 +122,14 @@ function launch(){
         dirlight.castShadow = true;
         cube.castShadow = true;
         terre.receiveShadow = true;
-        // render the seen
+       // render the seen
+        $('#container').bind('mousemove', function(e) {
+            var modif = e.clientX+e.clientY;
+            couleur ="0x"+ (0x1000000+(modif)*0xffffff).toString(16).substr(1,6)
+
+            console.log(couleur);
+            cube.material.color.setHex(couleur)
+        });
         renderer.render(scene, camera);
     }
 
@@ -157,7 +145,6 @@ function launch(){
         var timer = new Date().getTime()  ;
         cube.rotation.x =timer/1000;
         cube.rotation.y = timer/1000;
-
         // render the scene after moving the camera           
         controls.update();
         controllight.update();

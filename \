@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <style>
+            #container  {
+                    background-color: #fff;
+                }
+        </style>
+
+    </head>
+    <body>
+        <div id = "container">
+        </div>
+    </body>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="js/libs/jquery.mousewheel.js"></script>
+        <script type="text/javascript" src="js/libs/three.min.js"></script>
+        <script type="text/javascript" src="js/geometrymorph.js"></script>
+</html>
